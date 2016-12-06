@@ -1,0 +1,24 @@
+{
+  "name": "riot-abc",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "https://github.com/Joylei/riot-abc.git",
+  "author": "joylei <leingliu@126.com>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.18.2",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-es2017": "^6.16.0",
+    "babel-register": "^6.18.0",
+    "co": "^4.6.0",
+    "fs-promise": "^1.0.0",
+    "koa": "v2",
+    "koa-static": "^2.0.0",
+    "riot": "^3.0.2"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}

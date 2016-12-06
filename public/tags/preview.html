@@ -1,0 +1,54 @@
+<preview>
+    <div class="preview hidden">
+        <div class="toolbar">
+            <a ref="btnNew"  class="new" href="{ url || '#' }" target="_blank" title="Open In New Window">N</a>
+            <a ref="btnClose" href="#" class="close" title="Close" onclick="{ hidePreview }">X</a>
+        </div>
+        <iframe src="{ url || '#' }"  id="preview" if="{ url }"></iframe>
+    </div>
+
+    <script>
+        var self = this
+        this.url = ''
+
+        this.hidePreview = function(e){
+            e.preventDefault()
+
+            self.visible = true
+            self.update()
+        }
+
+        function showPreview(url){
+            if(/examples/.test(url)){
+                //invalid caches
+                var fullUrl = Util.resolveUrl(url);
+                url = './liveeditor/?' + decodeURIComponent(fullUrl);
+            }
+            self.url = url
+            self.update()
+        }
+
+        function clickHandler(e){
+            var el = e.srcElement
+            if(el.tagName !== 'A'){
+                return//only interested in 'A' tag
+            }
+            if(el == self.refs.btnNew || el == self.refs.btnClose){
+                return //skip
+            }
+
+            e.preventDefault()
+            var href = el.getAttribute('href')
+            console.log('showing url:' + href)
+            showPreview(href)
+        }
+
+        this.on('mount',function(){
+            document.addEventListener('click', clickHandler)
+        })
+
+        this.on('unmount',function(){
+            document.removeEventListener('click', clickHandler)
+        })
+    </script>
+</preview>
