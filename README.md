@@ -1,6 +1,6 @@
 # riot-abc
 
-live ppt slides for riotjs introduction with embed examples
+live ppt slides for riotjs introduction made by Remark.js
 
 ## License
 
