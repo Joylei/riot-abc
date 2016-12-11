@@ -1,0 +1,15 @@
+<clock>
+    <!--layout-->
+    <p>The time is { time }</p>
+    <!--style-->
+    <style>
+      p{ font-size:2em; color: gold;}
+    </style>
+    //logics
+    var self = this;
+    var id = setInterval(function(){
+        self.time = new Date().toLocaleTimeString()
+        self.update()
+    }, 1000)
+    self.on('unmount', function(){ clearInterval(id) })
+</clock>

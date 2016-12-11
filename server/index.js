@@ -44,13 +44,13 @@ app.use(async (ctx, next) => {
 
 app.use(publicFiles)
 
-app.use(async(ctx,next) => {
-  if(ctx.path == '/'){
-    ctx.body = '<h1> hello koa </h1>'
-  }else{
-    await next()
-  }
-});
+// app.use(async(ctx,next) => {
+//   if(ctx.path == '/'){
+//     ctx.body = '<h1> hello koa </h1>'
+//   }else{
+//     await next()
+//   }
+// });
 
 console.log('koa started: http://localhost:3000')
 app.listen(3000)

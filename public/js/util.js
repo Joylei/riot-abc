@@ -9,23 +9,30 @@
         }
     })()
 
-    util.http = function(url, done){
-        if(!url || !done) return
+    util.http = function(url, method, done){
+        if(!url) return
+
+        if(typeof method === 'function'){
+            done = method
+            method = 'GET'
+        }else{
+            method = method || 'GET'
+            done = done || function(){}
+        }
 
         var request = new XMLHttpRequest()
-        request.onreadystatechange(function(ev){
+        request.open(method, url, true)
+        request.onreadystatechange=function(ev){
             if(request.readyState === 4){
-                var response = request.response
-                var text = request.responseText
-                try {
-                    var data = JSON.parse(text)
-                    return done.call(null, data)
-                } catch (e) {
-                    console.error(e)
+                if(request.status>=200 && request.status<400){
+                    var text = request.responseText
+                    done(null, text)
+                    return
                 }
-                done.call(null, text)
+                done(request)
             }
-        })
-        request.open('GET', url, true)
+        }
+        
+        request.send(null)
     }
 })(window.util || (window.util = {}))

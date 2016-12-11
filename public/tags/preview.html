@@ -1,30 +1,32 @@
-<preview>
-    <div class="preview hidden">
-        <div class="toolbar">
-            <a ref="btnNew"  class="new" href="{ url || '#' }" target="_blank" title="Open In New Window">N</a>
-            <a ref="btnClose" href="#" class="close" title="Close" onclick="{ hidePreview }">X</a>
-        </div>
-        <iframe src="{ url || '#' }"  id="preview" if="{ url }"></iframe>
+<preview class="preview" show="{ url && visible }">
+    <div class="toolbar">
+        <a ref="btnNew"  class="new" href="{ url || '#' }" target="_blank" title="Open In New Window">N</a>
+        <a ref="btnClose" href="#" class="close" title="Close" onclick="{ hideFrame }">X</a>
     </div>
+    <iframe src="{ url }" if="{ url }"></iframe>
 
     <script>
         var self = this
-        this.url = ''
+        self.url = ''
+        self.visible = false
 
-        this.hidePreview = function(e){
+        this.hideFrame = function(e){
             e.preventDefault()
+            e.stopImmediatePropagation()
 
-            self.visible = true
+            self.visible = false
             self.update()
         }
 
-        function showPreview(url){
-            if(/examples/.test(url)){
+        function showFrame(url){
+            //if(/examples/.test(url)){
                 //invalid caches
-                var fullUrl = Util.resolveUrl(url);
-                url = './liveeditor/?' + decodeURIComponent(fullUrl);
-            }
-            self.url = url
+                var fullUrl = util.resolveUrl(url);
+                //url = './liveeditor/?' + decodeURIComponent(fullUrl);
+            //}
+
+            self.url = fullUrl
+            self.visible = true
             self.update()
         }
 
@@ -36,11 +38,11 @@
             if(el == self.refs.btnNew || el == self.refs.btnClose){
                 return //skip
             }
-
             e.preventDefault()
+            
             var href = el.getAttribute('href')
             console.log('showing url:' + href)
-            showPreview(href)
+            showFrame(href)
         }
 
         this.on('mount',function(){
@@ -49,6 +51,10 @@
 
         this.on('unmount',function(){
             document.removeEventListener('click', clickHandler)
+        })
+
+        this.on('updated', function(){
+            console.log('updated')
         })
     </script>
 </preview>

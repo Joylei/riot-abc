@@ -1,0 +1,25 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title>Clock</title>
+</head>
+<body>
+    <todo-item></todo-item>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/riot/3.0.2/riot+compiler.min.js"></script>
+    <script type="riot/tag">
+        <todo-item>
+            <p>{ opts.item }</p>
+            <style>
+                :scope{
+                    border: 1px solid gray;
+                }
+                p { color:red; } 
+            </style>
+        </todo-item>
+    </script>
+    <script>
+        riot.mount('todo-item', { item: 'Have a break' })
+    </script>
+</body>
+
+</html>

@@ -1,40 +1,46 @@
 <app>
-    <div>
-        <div class="{ loading ? 'loading': 'hidden' }">
-            <p class="text">Loading...</p>
-        </div>
-        <div class="error { error ? '' : 'hidden' }">
-            <p class="text">{{ state.error }}</p>
-        </div>
+    <div class="{ loading ? 'loading': 'hidden' }">
+        <p class="text">Loading...</p>
     </div>
-    <preview></preview>
+    <div class="error { error ? '' : 'hidden' }">
+        <p class="text">{ error }</p>
+    </div>
+    <div class="ppt hidden" ref="remark"></div>
+    <!--<preview></preview>-->
     
     <script>
-        this.loading = false
+        this.loading = true
         this.error = false
 
         function setupPPT(source){
             var slideshow = remark.create({
-                source: source
-                //,highlightStyle: 'monokai'
+                //container: self.refs.remark,
+                source: source,
+                navigation:{
+                    scroll: false
+                }
+                ,highlightStyle: 'monokai'
             })
 
             console.log('PPT initialized!')
         }
 
         var self = this
-        PPTStore.fetch(function(err, data){
-            if(err){
-                self.error = 'Something is wrong!'
-                self.loading = false
-                self.update() //remember to call update
-                return
-            }
+        this.on('mount', function(){
+            PPTStore.fetch(function(err, data){
+                if(err){
+                    self.error = 'Something is wrong!'
+                    self.loading = false
+                    self.update() //remember to call update
+                    return
+                }
 
-            setupPPT(data)
-            self.loading = false
-            self.error = null
-            self.update() //remember to call update
+                self.loading = false
+                self.error = null
+                self.update()
+
+                setupPPT(data)
+            })
         })
     </script>
 </app>
