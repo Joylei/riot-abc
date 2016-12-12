@@ -1,0 +1,40 @@
+<app>
+    <!--layout-->
+    <a href="#" onclick="{ click }">switch</a>
+    <div data-is="{ page }"></div>
+    
+    <script>
+        var self = this
+        this.page = 'page-one'
+        this.click = function(e){
+            self.page = self.page==='page-one' ? 'page-two' : 'page-one'
+        }
+    </script>
+</app>
+
+<page-one>
+    <p>this is page one</p>
+
+    <script>
+       var self = this;
+       self.on('before-mount', function(){
+           console.log('on before-mount')
+       })
+       self.on('mount', function(){
+           console.log('on mount')
+       })
+       self.on('update', function(){
+           console.log('on update')
+       })
+       self.on('before-unmount', function(){
+           console.log('on before-unmount')
+       })
+       self.on('unmount', function(){
+           console.log('on unmount')
+       })
+    </script>
+</page-one>
+
+<page-two>
+    <p>this is page two</p>
+</page-two>

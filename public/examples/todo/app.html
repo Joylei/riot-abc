@@ -1,0 +1,20 @@
+<todo>
+  <ul>
+    <li each={ item in items } class={ completed: item.done }>
+      <input type="checkbox" class="{ app: true, checked: false }" checked={ item.done }> { title }
+    </li>
+  </ul>
+
+  <script>
+    this.items = [
+        { title: 'First item', done: true },
+        { title: 'Second item', done: false },
+        { title: 'Third item', done: false }
+    ]
+
+  </script>
+
+  <style>
+      .completed{ color: green;}
+  </style>
+</todo>

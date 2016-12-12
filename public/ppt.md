@@ -443,6 +443,29 @@ Loops are implemented with each attribute as follows
 ```
 ]
 ---
+.left-column[
+  ## How does it work?
+  ### - Options
+  ### - Expressions
+  ### - Event Handlers
+  ### - Conditionals
+  ### - Update
+]
+.right-column[
+update()
+
+```js
+this.time = new Date().toLocaleTimeString()
+this.update()
+```
+
+or
+
+```js
+this.update({ time:  new Date().toLocaleTimeString()})
+```
+]
+---
 template: inverse
 
 ## It's time to get started!
