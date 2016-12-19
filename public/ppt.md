@@ -4,7 +4,7 @@ class: center, middle, inverse
 ---
 #riot.js
 .center[![](./img/riot240x.png)]
-latest v3.0.2
+latest v3.0.5
 ---
 ## What is it and why should I be using it?
 ---

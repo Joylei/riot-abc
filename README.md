@@ -2,6 +2,7 @@
 
 live ppt slides for riotjs introduction made by Remark.js
 
+![riot-abc slide screenshot](./demo.jpg)
 
 ## run
 
